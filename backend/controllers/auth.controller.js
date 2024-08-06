@@ -10,7 +10,7 @@ export const login= async (req, res) => {
         const idPasswordCorrect = await bcrypt.compare(password, user?.password || "")
 
         if(!user || !idPasswordCorrect) {
-            return res.status(401).json({message: "Invalid username or password"})
+            return res.status(401).json({error: "Invalid username or password"})
         }
 
         generateToken(user._id, res);
@@ -72,6 +72,7 @@ export const signup = async (req, res) => {
                 _id:newUser._id,
                 fullName: newUser.fullName,
                 username: newUser.username,
+                //profilePic: newUser.profilePic,
             })
         }
         else{
